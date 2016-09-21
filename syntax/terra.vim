@@ -164,12 +164,11 @@ syn keyword terraCommentTodo    TODO contained
 hi def link terraCommentTodo    Todo
 syn cluster terraCommentNote    contains=terraCommentTodo,terraCommentDamn,terraCommentOuch
 
+syn match   terraComment        @\%^#!.*$@
 syn match   terraComment        @--.*$@ contains=@terraCommentNote,terraCommentX
 hi def link terraComment        Comment
 syn region  terraCommentBlock   matchgroup=terraCommentBlockX start=@--\[\z(=*\)\[@ end=@\]\z1\]@ contains=@terraCommentNote
 hi def link terraCommentBlock   Comment
-syn match   terraShebang        @\%^#!.*$@
-hi def link terraShebang        Comment
 
 " for indent check
 syn match   terraCommentX       @--\ze.*$@ contained transparent
