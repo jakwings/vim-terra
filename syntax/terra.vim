@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 September 17
+" Last Change:  2016 September 21
 
 if exists('b:current_syntax')
   finish
@@ -153,7 +153,7 @@ hi def link terraEscape         SpecialChar
 syn region  terraString         matchgroup=terraStringX start=@"@ skip=@\\"@ end=@"@ contains=terraEscape,terraErrEscape
 syn region  terraString         matchgroup=terraStringX start=@'@ skip=@\\'@ end=@'@ contains=terraEscape,terraErrEscape
 hi def link terraString         String
-syn region  terraStringBlock    matchgroup=terraStringBlockX start=@\[\ze\z(=*\)\[@ end=@\]\z1\zs\]@
+syn region  terraStringBlock    matchgroup=terraStringBlockX start=@\[\z(=*\)\[@ end=@\]\z1]@
 hi def link terraStringBlock    String
 
 syn keyword terraCommentOuch    XXX contained
@@ -166,13 +166,13 @@ syn cluster terraCommentNote    contains=terraCommentTodo,terraCommentDamn,terra
 
 syn match   terraComment        @--.*$@ contains=@terraCommentNote,terraCommentX
 hi def link terraComment        Comment
-syn region  terraCommentBlock   matchgroup=terraCommentBlockX start=@-\ze-\[\z(=*\)\[@ end=@\]\z1\zs\]@ contains=@terraCommentNote
+syn region  terraCommentBlock   matchgroup=terraCommentBlockX start=@--\[\z(=*\)\[@ end=@\]\z1\]@ contains=@terraCommentNote
 hi def link terraCommentBlock   Comment
 syn match   terraShebang        @\%^#!.*$@
 hi def link terraShebang        Comment
 
 " for indent check
-syn match   terraCommentX       @-\ze-.*$@ contained transparent
+syn match   terraCommentX       @--\ze.*$@ contained transparent
 hi def link terraCommentBlockX  Comment
 hi def link terraStringX        String
 hi def link terraStringBlockX   String

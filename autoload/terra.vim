@@ -1,7 +1,7 @@
 " Vim plugin file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 September 17
+" Last Change:  2016 September 21
 
 if exists('b:did_autoload')
   finish
@@ -332,9 +332,9 @@ endfunction
 
 " NOTE:
 " |-- --inside
-"   ^^^^^^^^^^
+"    ^^^^^^^^^
 " |--[[ *inside ]]
-"   ^^^^^^^^^^^^^^
+"      ^^^^^^^^^
 function! s:InComment2(...)
   let [l:lnum, l:col] = (type(a:1) == type([]) ? a:1 : a:000)
   let l:stack = synstack(l:lnum, l:col)
@@ -356,20 +356,23 @@ endfunction
 " NOTE:
 " |"inside"
 "   ^^^^^^
-" |"""inside"""""
-"   ^^^^^^^^^^^^
+" |[[ inside ]]
+"    ^^^^^^^^
 function! s:InLiteral2(...)
   let [l:lnum, l:col] = (type(a:1) == type([]) ? a:1 : a:000)
-  for id in s:Or(synstack(l:lnum, l:col), [])
-    let l:sname = synIDattr(id, 'name')
+  let l:stack = synstack(l:lnum, l:col)
+  let l:i = len(l:stack)
+  while l:i > 0
+    let l:sname = synIDattr(l:stack[l:i - 1], 'name')
     if l:sname ==# 'terraStringBlock'
       return 2
     elseif l:sname ==# 'terraString'
       return 1
-    elseif l:sname =~# '\vterraString%(Block)?X$'
+    elseif l:sname =~# '\v^terraString%(Block)?X$'
       return 0
     endif
-  endfor
+    let l:i -= 1
+  endwhile
   return 0
 endfunction
 
@@ -400,6 +403,11 @@ function! s:OuterPos(x, y)
   else
     return a:x[1] > a:y[1] ? a:x : a:y
   end
+endfunction
+
+function! terra#MatchSkip()
+  let l:pos = getcurpos()[1:2]
+  return s:InComment2(l:pos) || s:InLiteral2(l:pos)
 endfunction
 
 

@@ -1,7 +1,7 @@
 " Vim filetype plugin file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 September 17
+" Last Change:  2016 September 21
 
 if exists('b:did_ftplugin')
   finish
@@ -25,8 +25,8 @@ setlocal suffixesadd=.t
 setlocal matchpairs=(:),{:},[:]
 
 let b:match_ignorecase = 0
-let b:match_skip = 's:Comment\|String'
-let b:match_words = '\v<%(function|terra|if|while|for|quote|escape)>\m:\v<%(then|elseif|else|do|in)>|\|\m:\<end\>,\<repeat\>:\<until\>,--\[\[:\]\],--\[=\[:\]=\],--\[==\[:\]==\],--\[===\[:\]===\],\[\[:\]\]\zs,\[=\[:\]=\]\zs,\[==\[:\]==\]\zs,\[===\[:\]===\]\zs,(:),\[:\],{:}'
+let b:match_skip = 'terra#MatchSkip()'
+let b:match_words = '\v<%(function|terra|if|while|for|quote|escape)>\m:\v<%(then|elseif|else|do|in)>|\|\m:\<end\>,\<repeat\>:\<until\>,\[\(=*\)\[:\]\1\],(:),\[:\],{:}'
 source $VIMRUNTIME/macros/matchit.vim
 
 
