@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 September 21
+" Last Change:  2016 October 7
 
 if exists('b:current_syntax')
   finish
@@ -13,14 +13,15 @@ set cpo&vim
 
 let s:terra_executable = exists('g:terra_executable') ? g:terra_executable : 'terra'
 let s:terra_is_executable = executable(s:terra_executable)
+let s:script_dir = expand('<sfile>:p:h:h') . '/scripts'
+let s:script_prg = shellescape(s:terra_executable) . ' '
 
 syn case match
-
 syn sync match terraSync grouphere NONE @\v^\s*%(function|terra|local|global|var)>@
 
 if s:terra_is_executable
-  let s:type_script = expand('<sfile>:p:h:h') . '/scripts/terra_predefined.t'
-  call execute(split(system(s:terra_executable . ' ' . s:type_script), "\n"))
+  let s:cmd = s:script_prg . shellescape(s:script_dir . '/terra_predefined.t')
+  call execute(split(system(s:cmd), "\n"))
 else
 " Predefined Variables {
 syn match   terraPredefined     @\v<Strict%(\_s*\.\_s*%(strict))?>@
@@ -135,8 +136,8 @@ syn keyword terraNull           nil
 hi def link terraNull           Constant
 
 if s:terra_is_executable
-  let s:type_script = expand('<sfile>:p:h:h') . '/scripts/terra_type.t'
-  call execute(split(system(s:terra_executable . ' ' . s:type_script), "\n"))
+  let s:cmd = s:script_prg . shellescape(s:script_dir . '/terra_type.t')
+  call execute(split(system(s:cmd), "\n"))
 else
 " Builtin Types {
 syn keyword terraType           bool double float int int16 int32 int64 int8 intptr long niltype opaque ptrdiff rawstring uint uint16 uint32 uint64 uint8
