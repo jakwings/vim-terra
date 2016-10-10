@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 October 7
+" Last Change:  2016 October 10
 
 if exists('b:current_syntax')
   finish
@@ -102,13 +102,21 @@ hi def link terraPredefined     Identifier
 " Predefined Variables }
 endif
 
-syn match   terraInteger        @\v<\d+@
-syn match   terraInteger        @\v<0[xX]\x+@
+syn match   terraErrNumber      @\S\+@ contained
+hi def link terraErrNumber      Error
+
+syn match   terraIntegerSuffix  @\v\cu?l?l?@ contained nextgroup=terraErrNumber
+hi def link terraIntegerSuffix  Number
+syn match   terraInteger        @\v<\d+@ nextgroup=terraIntegerSuffix,terraErrNumber
+syn match   terraInteger        @\v<0[xX]\x+@ nextgroup=terraIntegerSuffix,terraErrNumber
 hi def link terraInteger        Number
 
-syn match   terraFloat          @\v<\d+\.\d+%([eE][-+]?\d+)?@
-syn match   terraFloat          @\v<\d+[eE][-+]?\d+@
-syn match   terraFloat          @\v\.\d+%([eE][-+]?\d+)?@
+syn match   terraFloatSuffix    @f@ contained nextgroup=terraErrNumber
+hi def link terraFloatSuffix    Float
+syn match   terraFloat          @\v<\d+f@ nextgroup=terraErrNumber
+syn match   terraFloat          @\v<\d+\.%(\d+)?%([eE][-+]?\d+)?@ nextgroup=terraFloatSuffix,terraErrNumber
+syn match   terraFloat          @\v<\d+[eE][-+]?\d+@ nextgroup=terraFloatSuffix,terraErrNumber
+syn match   terraFloat          @\v\.\d+%([eE][-+]?\d+)?@ nextgroup=terraFloatSuffix,terraErrNumber
 hi def link terraFloat          Float
 
 syn match   terraIdentifier     /\v(::\_s*)@<=\i+%(\_s*[:.]\_s*\i+)*(\_s*::)@=/
