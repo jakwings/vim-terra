@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 October 10
+" Last Change:  2016 October 11
 
 if exists('b:current_syntax')
   finish
@@ -159,8 +159,8 @@ hi def link terraErrEscape      Error
 syn match   terraEscape         @\v\\%([abfnrtvz"'\\]|x\x\x|\d{1,3})@ contained
 hi def link terraEscape         SpecialChar
 
-syn region  terraString         matchgroup=terraStringX start=@"@ skip=@\\"\|\\\\@ end=@"@ contains=terraEscape,terraErrEscape
-syn region  terraString         matchgroup=terraStringX start=@'@ skip=@\\'\|\\\\@ end=@'@ contains=terraEscape,terraErrEscape
+syn region  terraString         matchgroup=terraStringX start=@"@ skip=@\\.@ end=@"@ contains=terraEscape,terraErrEscape
+syn region  terraString         matchgroup=terraStringX start=@'@ skip=@\\.@ end=@'@ contains=terraEscape,terraErrEscape
 hi def link terraString         String
 syn region  terraStringBlock    matchgroup=terraStringBlockX start=@\[\z(=*\)\[@ end=@\]\z1]@
 hi def link terraStringBlock    String
