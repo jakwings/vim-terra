@@ -132,7 +132,7 @@ syn match   terraSymbol         @\v\.{3}|::|`@
 hi def link terraSymbol         Special
 
 " NO HIGHLIGHT
-syn match   terraBracket        @[(\[{}\])]@
+syn match   terraBracket        @[([{}\])]@
 
 syn keyword terraStatement      break defer do else elseif end escape for function global goto if import in local quote repeat return struct terra then union until var while
 hi def link terraStatement      Statement

@@ -1,7 +1,7 @@
 " Vim plugin file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 September 21
+" Last Change:  2016 October 10
 
 if exists('b:did_autoload')
   finish
@@ -98,9 +98,9 @@ function! terra#Indent()
   endif
 
   " If the previous line contains an unmatched opening bracket
-  if !l:continuing && l:pnbline =~# '[(\[{]'
+  if !l:continuing && l:pnbline =~# '[([{]'
     " if the line ends with an opening bracket,
-    if l:pnbline =~# '[(\[{]\s*$' && !s:InCommentOrLiteral(l:pnblnum, col([l:pnblnum, '$']) - 1)
+    if l:pnbline =~# '[([{]\s*$' && !s:InCommentOrLiteral(l:pnblnum, col([l:pnblnum, '$']) - 1)
       " indent this line.
       let l:indent += l:shiftwidth
     else
