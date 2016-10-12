@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.t set filetype=terra
+autocmd BufRead,BufNewFile *.t setf terra
