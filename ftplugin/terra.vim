@@ -1,7 +1,7 @@
 " Vim filetype plugin file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 September 21
+" Last Change:  2016 October 14
 
 if exists('b:did_ftplugin')
   finish
@@ -28,6 +28,9 @@ let b:match_ignorecase = 0
 let b:match_skip = 'terra#MatchSkip()'
 let b:match_words = '\v<%(function|terra|if|while|for|quote|escape)>\m:\v<%(then|elseif|else|do|in)>|\|\m:\<end\>,\<repeat\>:\<until\>,\[\(=*\)\[:\]\1\],(:),\[:\],{:}'
 source $VIMRUNTIME/macros/matchit.vim
+
+let b:undo_ftplugin = 'set comments< commentstring< formatoptions< path< include< includeexpr< define< isident< iskeyword< suffixesadd< matchpairs<'
+      \ . ' | unlet! b:match_ignorecase b:match_skip b:match_words'
 
 
 let &cpo = s:cpo_save
