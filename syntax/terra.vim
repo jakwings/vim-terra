@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 October 11
+" Last Change:  2016 October 19
 
 if exists('b:current_syntax')
   finish
@@ -102,10 +102,10 @@ hi def link terraPredefined     Identifier
 " Predefined Variables }
 endif
 
-syn match   terraErrNumber      @\S\+@ contained
+syn match   terraErrNumber      @\w\+@ contained
 hi def link terraErrNumber      Error
 
-syn match   terraIntegerSuffix  @\v\cu?l?l?@ contained nextgroup=terraErrNumber
+syn match   terraIntegerSuffix  @\v\c%(ul?l?|ll?)@ contained nextgroup=terraErrNumber
 hi def link terraIntegerSuffix  Number
 syn match   terraInteger        @\v<\d+@ nextgroup=terraIntegerSuffix,terraErrNumber
 syn match   terraInteger        @\v<0[xX]\x+@ nextgroup=terraIntegerSuffix,terraErrNumber
