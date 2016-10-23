@@ -1,7 +1,7 @@
 " Vim plugin file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 October 10
+" Last Change:  2016 October 23
 
 if exists('b:did_autoload')
   finish
@@ -105,9 +105,6 @@ function! terra#Indent()
       let l:indent += l:shiftwidth
     else
       " find the unmatched opening bracket,
-      " NOTE: The cursor must not be at an matched closing bracket.
-      "  | ( (()) //(
-      "        ^^----- not at these places
       let l:start = [0, 0]
       let l:end = col([l:pnblnum, '$']) - 1
       call cursor(l:pnblnum, l:end)
@@ -126,8 +123,8 @@ function! terra#Indent()
           " the unmatched opening bracket is found,
           break
         endif
-        let l:start = [0, 0]
         let l:end = l:start[1]
+        let l:start = [0, 0]
       endwhile
       if l:start != [0, 0]
         " indent this line.
