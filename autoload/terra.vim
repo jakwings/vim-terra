@@ -1,11 +1,7 @@
 " Vim plugin file
 " Language:     Terra
 " Maintainer:   Jak Wings
-" Last Change:  2016 October 23
-
-if exists('b:did_autoload')
-  finish
-endif
+" Last Change:  2016 November 2
 
 " TODO: Make sure echomsg is off for release.
 let s:cpo_save = &cpo
@@ -410,5 +406,3 @@ endfunction
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-let b:did_autoload = 1
