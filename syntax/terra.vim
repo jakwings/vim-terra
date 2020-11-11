@@ -20,7 +20,7 @@ syn case match
 syn sync match terraSync grouphere NONE @\v^\s*%(function|terra|local|global|var)>@
 
 if s:terra_is_executable
-  let s:cmd = s:script_prg . shellescape(s:script_dir . '/terra_predefined.t')
+  let s:cmd = s:script_prg . ' - <' . shellescape(s:script_dir . '/terra_predefined.t')
   call execute(split(system(s:cmd), "\n"))
 else
 " Predefined Variables {
@@ -144,7 +144,7 @@ syn keyword terraNull           nil
 hi def link terraNull           Constant
 
 if s:terra_is_executable
-  let s:cmd = s:script_prg . shellescape(s:script_dir . '/terra_type.t')
+  let s:cmd = s:script_prg . ' - < ' . shellescape(s:script_dir . '/terra_type.t')
   call execute(split(system(s:cmd), "\n"))
 else
 " Builtin Types {
